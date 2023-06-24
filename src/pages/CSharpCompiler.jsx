@@ -63,7 +63,7 @@ const CSharpCompiler = () => {
 			</div>
 			<div>
 				<h2>Output</h2>
-				<pre style={{ minHeight: '100px', backgroundColor: 'lightgray', padding: '1rem', minWidth: 'fit-content', marginInline: 'auto' }}>{response.output}</pre>
+				<pre className="output-box">{response.output}</pre>
 			</div>
 		</div>
 	);

@@ -6,6 +6,8 @@ import CPlusPlusCompiler from './pages/CPlusPlusCompiler';
 import CCompiler from './pages/CCompiler';
 import CSharpCompiler from './pages/CsharpCompiler';
 import JSCompiler from './pages/JSCompiler';
+import HtmlCompiler from './pages/HtmlCompiler';
+// import NewCompiler from './pages/NewCompiler';
 
 function App() {
 	return (
@@ -33,7 +35,11 @@ function App() {
 						<NavLink className="link" to={'/compiler/js'}>
 							JavaScript Compiler
 						</NavLink>
+						<NavLink className="link" to={'/compiler/html'}>
+							HTML Compiler
+						</NavLink>
 					</div>
+					{/* <NewCompiler title={'test'} language={'java'} /> */}
 				</div>
 				<Routes>
 					<Route path="/compiler/python" element={<PythonCompiler />} />
@@ -42,6 +48,7 @@ function App() {
 					<Route path="/compiler/c" element={<CCompiler />} />
 					<Route path="/compiler/csharp" element={<CSharpCompiler />} />
 					<Route path="/compiler/js" element={<JSCompiler />} />
+					<Route path="/compiler/html" element={<HtmlCompiler />} />
 				</Routes>
 			</BrowserRouter>
 		</>

@@ -23,3 +23,11 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
+
+.output-box {
+    min-height: 100px;
+    background-color: lightgray;
+    padding: 1rem;
+    min-width: fit-content;
+    margin-inline: auto
+}

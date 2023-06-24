@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import pt from 'prop-types';
 
-const CCompiler = () => {
+const NewCompiler = ({ title, language }) => {
 	const [code, setCode] = useState('');
 	const [response, setResponse] = useState({ output: '' });
 	const [toggle, setToggle] = useState(false);
+
+	title === undefined ? (title = 'Online') : (title = language);
 
 	const handleCodeChange = (event) => {
 		setCode(event.target.value);
@@ -27,7 +30,7 @@ const CCompiler = () => {
 				// Send the code to the backend for execution
 				console.log('code when in handleRunCode: ', code);
 				try {
-					const axiosRes = await axios.post('http://127.0.0.1:4040/compiler/c', { code: code.toString(), language: 'python' });
+					const axiosRes = await axios.post(`http://127.0.0.1:4040/compiler/${language}`, { code: code.toString(), language: 'python' });
 					console.log(axiosRes);
 					if (axiosRes.status === 200) {
 						setResponse(axiosRes.data);
@@ -43,7 +46,7 @@ const CCompiler = () => {
 
 	return (
 		<div>
-			<h1>C Compiler</h1>
+			<h1>{title} Compiler</h1>
 			<div>
 				<h2>Editor</h2>
 				<form name="code-form">
@@ -68,4 +71,11 @@ const CCompiler = () => {
 		</div>
 	);
 };
-export default CCompiler;
+
+NewCompiler.propTypes = {
+	url: pt.string,
+	title: pt.string,
+	language: pt.string,
+};
+
+export default NewCompiler;

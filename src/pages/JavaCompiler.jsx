@@ -27,7 +27,7 @@ const JavaCompiler = () => {
 				// Send the code to the backend for execution
 				console.log('code when in handleRunCode: ', code);
 				try {
-					const axiosRes = await axios.post('http://127.0.0.1:4040/compiler/java', { code: code.toString(), language: 'python' });
+					const axiosRes = await axios.post('http://127.0.0.1:4040/compiler/java', { code: code.toString(), language: 'java' });
 					console.log(axiosRes);
 					if (axiosRes.status === 200) {
 						setResponse(axiosRes.data);
@@ -63,7 +63,7 @@ const JavaCompiler = () => {
 			</div>
 			<div>
 				<h2>Output</h2>
-				<pre style={{ minHeight: '100px', backgroundColor: 'lightgray', padding: '1rem', minWidth: 'fit-content', marginInline: 'auto' }}>{response.output}</pre>
+				<pre className="output-box">{response.output}</pre>
 			</div>
 		</div>
 	);
