@@ -1,4 +1,4 @@
-//JAVASCRIPT COMPILER CONTROLLER
+// Compile and execute JavaScript code
 
 // importing packages
 import { spawn } from 'child_process';

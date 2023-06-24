@@ -12,11 +12,6 @@ const __dirname = path.dirname(__filename);
 
 const javaCompiler = async (req, res) => {
 	try {
-		const tempDir = path.join(__dirname, 'temp');
-		if (!fs.existsSync(tempDir)) {
-			fs.mkdirSync(tempDir, { recursive: true });
-		}
-
 		const { code, args, language } = req.body;
 		let codeArgs;
 
@@ -29,12 +24,19 @@ const javaCompiler = async (req, res) => {
 			codeArgs = [...args];
 		}
 
+		// check for temp folder, if not available then create it
+		const tempDir = path.join(__dirname, 'temp');
+		if (!fs.existsSync(tempDir)) {
+			fs.mkdir(tempDir, { recursive: true });
+		}
+
 		// Save the code to a Java file
 		const filename = 'Main.java';
-		fs.writeFileSync(`${tempDir}/${filename}`, code);
+		const fileName = path.join(tempDir, filename);
+		fs.writeFile(fileName, code);
 
 		// Compile the Java code
-		exec(`javac ${tempDir}/${filename}`, (compileError, compileStdout, compileStderr) => {
+		exec(`javac ${fileName}`, (compileError, compileStdout, compileStderr) => {
 			if (compileError) {
 				console.error(compileError);
 				res.status(400).json({ output: compileStderr });
@@ -50,11 +52,14 @@ const javaCompiler = async (req, res) => {
 					}
 
 					// Remove the Java file
-					fs.unlink(`${tempDir}/${filename}`, (error) => {
+					fs.unlink(fileName, (error) => {
 						if (error) throw new Error('Error while removing the Java file:', error);
 					});
 				});
 			}
+			fs.unlink(path.join(tempDir, 'Main.class'), (err) => {
+				if (err) throw new Error('Error while removing the Java class file:', err);
+			});
 		});
 	} catch (error) {
 		console.error('Error while processing the request:', error);
