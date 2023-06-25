@@ -1,33 +1,91 @@
 .link {
     display: inline-block;
     border-radius: 5px;
-    background-color: lightblue;
+    background-color: lightskyblue;
     color: black;
     text-decoration: none;
     padding: 0.3rem;
-    border: 1px solid lightgray;
-    margin-inline: 0.5rem;
+    border: 1px solid whitesmoke;
+    margin-inline: 1.5rem;
     margin-block: 1rem;
+    flex: 0 1 150px;
+    text-align: center;
 }
 
 .link.active {
-    background-color: lightgreen;
+    background-color: steelblue;
     transform: scale(1.2);
+    box-shadow: 2px 2px 2px #a9a9a9;
+    color: white;
 }
 
 .link-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
+    width: 90%;
+    margin-inline: auto;
+    column-gap: 50px;
 }
 
 .output-box {
-    min-height: 100px;
+    min-height: 90px;
+    min-width: 90%;
     background-color: lightgray;
     padding: 1rem;
-    min-width: fit-content;
+    width: fit-content;
     margin-inline: auto
+}
+
+form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-end;
+    column-gap: 6rem;
+}
+
+textarea {
+    margin-top: 1em;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 180px;
+    justify-content: space-between;
+}
+
+.btn-container button {
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+.btn-container button:hover,
+.btn-container button:focus {
+    outline: 1px solid whitesmoke;
+    transform: scale(1.1);
+}
+
+.btn-container button:first-child {
+    background-color: #ff9090;
+}
+
+.btn-container button:last-child {
+    background-color: #90ee90;
+}
+
+.compiler-page>h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 0;
 }

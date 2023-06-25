@@ -7,7 +7,10 @@ const NewCompiler = ({ title, language }) => {
 	const [response, setResponse] = useState({ output: '' });
 	const [toggle, setToggle] = useState(false);
 
-	title === undefined ? (title = 'Online') : (title = language);
+	let newTitle;
+	title === undefined ? (title = 'online') : language === 'cpp' ? (title = 'c++') : language === 'csharp' ? (title = 'c#') : (title = language);
+	language === 'html' ? (newTitle = 'HTML') : language === 'php' ? (newTitle = 'PHP') : language === 'js' ? (newTitle = 'JavaScript') : (newTitle = String(title).charAt(0).toUpperCase() + title.slice(1));
+	// const str = new String.prototype.charAt(0).toUpperCase()
 
 	const handleCodeChange = (event) => {
 		setCode(event.target.value);
@@ -45,15 +48,13 @@ const NewCompiler = ({ title, language }) => {
 	}, [toggle]);
 
 	return (
-		<div>
-			<h1>{title} Compiler</h1>
+		<div className="compiler-page">
+			<h1>{newTitle} Compiler</h1>
 			<div>
 				<h2>Editor</h2>
 				<form name="code-form">
-					<textarea value={code} onChange={handleCodeChange} maxLength={2000} rows={10} cols={100} />
-					<br />
-					<br />
-					<div style={{ width: '20rem', display: 'flex', justifyContent: 'space-around' }}>
+					<textarea value={code} onChange={handleCodeChange} maxLength={2000} rows={10} cols={120} />
+					<div className="btn-container">
 						<button type="reset" onClick={handleReset}>
 							Reset
 						</button>
@@ -61,7 +62,6 @@ const NewCompiler = ({ title, language }) => {
 							Run Code
 						</button>
 					</div>
-					{/* {console.log(response)} */}
 				</form>
 			</div>
 			<div>
