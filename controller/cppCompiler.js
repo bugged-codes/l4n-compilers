@@ -47,7 +47,7 @@ const cppCompiler = async (req, res) => {
 		console.log('filePath', filePath);
 
 		// Save the C++ code to a file
-		fs.writeFile(filePath, sanitizedCode, (writeErr) => {
+		fs.writeFileSync(filePath, sanitizedCode, (writeErr) => {
 			if (writeErr) {
 				console.error(`Error writing code to file: ${writeErr}`);
 				return res.status(500).json({ error: 'Error saving code' });
@@ -72,7 +72,7 @@ const cppCompiler = async (req, res) => {
 			});
 
 			// Delete the temporary files
-			fs.unlink(filePath, (unlinkErr) => {
+			fs.unlinkSync(filePath, (unlinkErr) => {
 				if (unlinkErr) {
 					console.error(`Error deleting file: ${unlinkErr}`);
 				}

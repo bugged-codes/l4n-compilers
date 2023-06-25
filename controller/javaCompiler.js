@@ -33,7 +33,7 @@ const javaCompiler = async (req, res) => {
 		// Save the code to a Java file
 		const filename = 'Main.java';
 		const fileName = path.join(tempDir, filename);
-		fs.writeFile(fileName, code);
+		fs.writeFileSync(fileName, code);
 
 		// Compile the Java code
 		exec(`javac ${fileName}`, (compileError, compileStdout, compileStderr) => {
@@ -48,16 +48,16 @@ const javaCompiler = async (req, res) => {
 						res.status(500).json({ error: 'An error occurred while executing the code.' });
 					} else {
 						const output = executeStderr || executeStdout;
-						res.json({ output });
+						res.status(200).json({ output });
 					}
 
 					// Remove the Java file
-					fs.unlink(fileName, (error) => {
+					fs.unlinkSync(fileName, (error) => {
 						if (error) throw new Error('Error while removing the Java file:', error);
 					});
 				});
 			}
-			fs.unlink(path.join(tempDir, 'Main.class'), (err) => {
+			fs.unlinkSync(path.join(tempDir, 'Main.class'), (err) => {
 				if (err) throw new Error('Error while removing the Java class file:', err);
 			});
 		});
